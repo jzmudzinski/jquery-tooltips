@@ -56,7 +56,7 @@
             }
 
 
-            if ($this.find('.tooltip-box').length == 0) $this.append('<div class="tooltip-box"></div>');
+            if ($this.next('.tooltip-box').length == 0) $this.after('<div class="tooltip-box"></div>');
             
             if (config.ajax) {
                 tip_content = config.spinner;
@@ -69,16 +69,16 @@
                     tip_content = title[0];
                 }
             } else {
-                tip_content = $this.find('.tooltip-box').html();
+                tip_content = $this.next('.tooltip-box').html();
             }
-            $tip = $this.find('.tooltip-box');
+            $tip = $this.next('.tooltip-box');
 
             if (($this.attr('rel') && $this.attr('rel').search('jquery-tipped') == -1) || !$this.attr('rel')) {
+                $tip
+                    .html(config.tipTemplate.replace(/_CONTENT_/, (tip_title ? '<h3>' + tip_title + '</h3>': '') + tip_content))
+                    .css({ position: 'absolute' })
+                    .find('.tooltip').css({width: config.width});
                 $this
-                    .find('.tooltip-box')
-                        .html(config.tipTemplate.replace(/_CONTENT_/, (tip_title ? '<h3>' + tip_title + '</h3>': '') + tip_content))
-                        .css({ position: 'absolute' }).end()
-                    .find('.tooltip').css({width: config.width}).end()
                     .removeAttr('title')
                     .attr('rel', 'jquery-tipped')
                     .bind(config.popup ? 'click' : 'mouseenter', showTooltip)

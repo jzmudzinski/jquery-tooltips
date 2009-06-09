@@ -3,13 +3,18 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>Tips test</title>
-	<script src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="jquery.tooltips.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+	<script src="jquery.tooltips.js"></script>
 	<style type="text/css" media="screen">
 		body {
 			font-family: Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
 			font-size: 12px;
 			font-weight: normal;
+		}
+		#wrapper {
+			width: 920px;
+			margin: 0 auto;
 		}
 		.tooltip {
 			background: #333;
@@ -30,43 +35,49 @@
 			font-weight: bold;
 			margin: 0 0 4px 0;
 		}
+		footer {
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
-	<article>
-		<h1>jQuery tooltips plugin</h1>
-		<section>
-			<h2>Demonstration</h2>
-			<ul>
-				<li>
-					<p>This is a title attribute <a href="#" class="tooltip-trigger" title="Title | link title tooltip test">tooltip</a></p>
-				</li>
-				<li>
-					<a href="#" class="tooltip-trigger">
-						Tooltip
+	<div id="wrapper">
+		<header>
+			<h1>jQuery tooltips plugin</h1>
+		</header>
+		<article>
+			<section>
+				<h2>Demonstration</h2>
+				<ul>
+					<li>
+						<p>This is a title attribute <a href="#" class="tooltip-trigger" title="Title | link title tooltip test">tooltip</a></p>
+					</li>
+					<li>
+						<a href="#" class="tooltip-trigger">Tooltip</a>	with HTML content
 						<div class="tooltip-box">
 							<h3>This</h3>
 							<p>is a <strong>tooltip</strong></p>
 						</div>
-					</a>	with HTML content
-				</li>
-				<li>
-					<p>This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request</p>
-				</li>
-				<li>
-					<a href="#" class="popup-tooltip-trigger">
-						Popup
+					</li>
+					<li>
+						<p>This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request</p>
+					</li>
+					<li>
+						<a href="#" class="popup-tooltip-trigger">Popup</a> with HTML content
 						<div class="tooltip-box">
 							<h3>This</h3>
 							<p>is a <strong>tooltip</strong></p>
 							<span class="tooltip-closer">close</span>
 						</div>
-					</a> with HTML content
-				</li>
-			</ul>
-		</section>
-	</article>	
-
+					</li>
+				</ul>
+			</section>
+		</article>	
+		<hr />
+		<footer>
+			<div><small>© 2009 Jarek Zmudzinski</small></div>
+		</footer>
+	</div>
 <script>
 $(document).ready(function(){
 	$('.tooltip-trigger').tooltip();
