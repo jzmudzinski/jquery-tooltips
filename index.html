@@ -5,25 +5,53 @@
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<title>Tips test</title>
 	<script src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="jquery.tips.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.tooltips.js" type="text/javascript" charset="utf-8"></script>
 	<style type="text/css" media="screen">
 		body {
 			font-family: Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
 			font-size: 12px;
 		}
+		.tooltip {
+			background: #333;
+			opacity: 0.9;
+			color: #fff;
+		}
+		.tooltip-content {
+			padding: 5px;
+		}
 		.tooltip-box { 
-			display: none; 
+			display: none;
+		}
+		.tooltip h3 {
+			font-size: 14px;
+			font-weight: bold;
+			margin: 0 0 4px 0;
 		}
 	</style>
 </head>
 <body>
-	
-	<h1>Tytuł</h1>
-	<p>Lorem <a href="tip1.html" class="tooltip-trigger" title="Test | testowanie tipa w tytule">ipsum<span class="tooltip-box"><h1>To</h1> <p><strong>jest</strong> tip</p></span></a> dolor <a href="#" class="tooltip-trigger" title="">sit<span class="tooltip-content">A to jest drugi tip</span></a> amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<h1>jQuery tooltips plugin</h1>
+	<h2>Demonstration</h1>
+	<p>
+		This is a title attribute <a href="#" class="tooltip-trigger" title="Title | link title tooltip test">tooltip</a>
+	</p>
+	<p>
+		<a href="#" class="tooltip-trigger" title="">
+			Tooltip
+			<span class="tooltip-box">
+				<h3>This</h3>
+				<p>is a <strong>tooltip</strong></p>
+			</span>
+		</a>	with HTML content  
+	</p>
+	<p>
+		This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request
+	</p>
 	
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
-			$('.tooltip-trigger').tooltip({ajax:true, followMouse:false, position: 'left'});
+			$('.tooltip-trigger').tooltip();
+			$('.ajax-tooltip-trigger').tooltip({ajax:true, followMouse:true});
 		});
 	</script>
 	
