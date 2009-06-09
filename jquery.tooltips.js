@@ -25,7 +25,7 @@
             var tip_content, tip_title;
             var title = $this.attr('title');
 
-            if ($this.find('.tooltip-box').length == 0) $this.append('<span class="tooltip-box"></span>');
+            if ($this.find('.tooltip-box').length == 0) $this.append('<div class="tooltip-box"></div>');
             
             if (config.ajax) {
                 tip_content = config.spinner;

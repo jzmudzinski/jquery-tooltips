@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -10,17 +9,21 @@
 		body {
 			font-family: Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
 			font-size: 12px;
+			font-weight: normal;
 		}
 		.tooltip {
 			background: #333;
 			opacity: 0.9;
 			color: #fff;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
 		}
 		.tooltip-content {
 			padding: 5px;
 		}
 		.tooltip-box { 
 			display: none;
+			text-decoration: none;
 		}
 		.tooltip h3 {
 			font-size: 14px;
@@ -30,30 +33,36 @@
 	</style>
 </head>
 <body>
-	<h1>jQuery tooltips plugin</h1>
-	<h2>Demonstration</h1>
-	<p>
-		This is a title attribute <a href="#" class="tooltip-trigger" title="Title | link title tooltip test">tooltip</a>
-	</p>
-	<p>
-		<a href="#" class="tooltip-trigger" title="">
-			Tooltip
-			<span class="tooltip-box">
-				<h3>This</h3>
-				<p>is a <strong>tooltip</strong></p>
-			</span>
-		</a>	with HTML content  
-	</p>
-	<p>
-		This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request
-	</p>
-	
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function(){
-			$('.tooltip-trigger').tooltip();
-			$('.ajax-tooltip-trigger').tooltip({ajax:true, followMouse:true});
-		});
-	</script>
+	<article>
+		<h1>jQuery tooltips plugin</h1>
+		<section>
+			<h2>Demonstration</h2>
+			<ul>
+				<li>
+					<p>This is a title attribute <a href="#" class="tooltip-trigger" title="Title | link title tooltip test">tooltip</a></p>
+				</li>
+				<li>
+					<a href="#" class="tooltip-trigger">
+						Tooltip
+						<div class="tooltip-box">
+							<h3>This</h3>
+							<p>is a <strong>tooltip</strong></p>
+						</div>
+					</a>	with HTML content
+				</li>
+				<li>
+					<p>This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request</p>
+				</li>
+			</ul>
+		</section>
+	</article>	
+
+<script>
+$(document).ready(function(){
+	$('.tooltip-trigger').tooltip();
+	$('.ajax-tooltip-trigger').tooltip({ajax:true, followMouse:false});
+});
+</script>
 	
 </body>
 </html>	
