@@ -53,6 +53,16 @@
 				<li>
 					<p>This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request</p>
 				</li>
+				<li>
+					<a href="#" class="popup-tooltip-trigger">
+						Popup
+						<div class="tooltip-box">
+							<h3>This</h3>
+							<p>is a <strong>tooltip</strong></p>
+							<span class="tooltip-closer">close</span>
+						</div>
+					</a> with HTML content
+				</li>
 			</ul>
 		</section>
 	</article>	
@@ -61,6 +71,7 @@
 $(document).ready(function(){
 	$('.tooltip-trigger').tooltip();
 	$('.ajax-tooltip-trigger').tooltip({ajax:true, followMouse:false});
+	$('.popup-tooltip-trigger').tooltip({popup: true});
 });
 </script>
 	

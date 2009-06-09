@@ -14,16 +14,47 @@
             position: 'right',
             width: 250,
             followMouse: true,
+            popup: false,
             ajax: false,
             ajaxOptions: {}
         }, options);
-
+        
         return this.each(function() {
             var $this = $(this);
             var $tip;
             var timer_in, timer_out;
             var tip_content, tip_title;
             var title = $this.attr('title');
+
+            var showTooltip = function(){
+                if (config.ajax && !$tip.hasClass('tooltip-loaded')) {
+                    $.ajax($.extend({
+                        url: $this.attr('href'),
+                        type: 'GET',
+                        async: false,
+                        data: {},
+                        success: function(response) {
+                            $tip.find('.tooltip-content').html(response);
+                            $tip.addClass('tooltip-loaded')
+                        } }, config.ajaxOptions));
+                }
+                if (config.delay == 0) {
+                    $tip.show();
+                } else {
+                    clearTimeout(timer_out);
+                    timer_in = setTimeout(function() { $tip.show(); }, config.delay);
+                }
+            }
+
+            var hideTooltip = function(){
+                if (config.delay == 0) {
+                    $tip.hide();
+                } else {
+                    clearTimeout(timer_in);
+                    timer_out = setTimeout(function() { $tip.hide(); }, 100);
+                }
+            }
+
 
             if ($this.find('.tooltip-box').length == 0) $this.append('<div class="tooltip-box"></div>');
             
@@ -50,35 +81,15 @@
                     .find('.tooltip').css({width: config.width}).end()
                     .removeAttr('title')
                     .attr('rel', 'jquery-tipped')
-                    .bind('mouseenter', function() {
-                        if (config.ajax && !$tip.hasClass('tooltip-loaded')) {
-                            $.ajax($.extend({
-                                url: $this.attr('href'),
-                                type: 'GET',
-                                async: false,
-                                data: {},
-                                success: function(response) {
-                                    $tip.find('.tooltip-content').html(response);
-                                    $tip.addClass('tooltip-loaded')
-                                } }, config.ajaxOptions));
-                        }
-                        if (config.delay == 0) {
-                            $tip.show();
-                        } else {
-                            clearTimeout(timer_out);
-                            timer_in = setTimeout(function() { $tip.show(); }, config.delay);
-                        }
-                    })
-                    .bind('mouseleave', function() {
-                        if (config.delay == 0) {
-                            $tip.hide();
-                        } else {
-                            clearTimeout(timer_in);
-                            timer_out = setTimeout(function() { $tip.hide(); }, 100);
-                        }
-                    });
+                    .bind(config.popup ? 'click' : 'mouseenter', showTooltip)
+                    
+                if ( config.popup ) {
+                    $tip.find('.tooltip-closer').bind('click', hideTooltip);
+                } else { 
+                    $this.bind('mouseleave', hideTooltip);
+                }
 
-                if ( config.followMouse ){
+                if ( config.followMouse && !config.popup ){
                     $this.bind('mousemove', function(e) {
                         $tip.css({
                             left: (config.position == 'left' ? e.pageX - 15 - config.width: e.pageX + 15),
