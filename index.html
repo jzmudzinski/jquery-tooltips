@@ -16,27 +16,37 @@
 			width: 920px;
 			margin: 0 auto;
 		}
-		.tooltip {
+		.tooltip-content {
+			padding: 5px;
+		}
+		.tooltip-box { 
 			background: #333;
 			opacity: 0.9;
 			color: #fff;
 			-moz-border-radius: 3px;
 			-webkit-border-radius: 3px;
-		}
-		.tooltip-content {
-			padding: 5px;
-		}
-		.tooltip-box { 
 			display: none;
 			text-decoration: none;
+			padding: 5px;
 		}
-		.tooltip h3 {
+		.tooltip-box h3 {
 			font-size: 14px;
 			font-weight: bold;
 			margin: 0 0 4px 0;
 		}
 		footer {
 			text-align: center;
+		}
+		a.tooltip-closer {
+			color: #bbb;
+			text-decoration: none;
+			position: absolute;
+			top: 3px;
+			right: 3px;
+			font-size: 10px;
+		}
+		a.tooltip-closer:hover {
+			color: #fff;
 		}
 	</style>
 </head>
@@ -60,7 +70,7 @@
 						</div>
 					</li>
 					<li>
-						<p>This <a href="tip1.html" class="ajax-tooltip-trigger">tooltip's</a> content is fetched using AJAX request</p>
+						<p>This <a href="tip1.html" class="ajax-tooltip-trigger" onclick="return false;">tooltip's</a> content is fetched using AJAX request</p>
 					</li>
 					<li>
 						<a href="#" class="popup-tooltip-trigger">Popup</a> with HTML content

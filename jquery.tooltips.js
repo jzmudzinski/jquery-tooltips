@@ -16,7 +16,7 @@
             cache: true,
             ajaxOptions: {}
             }, $.tooltip.defaults, options);
-        
+
         return this.each(function() {
             var $this = $(this);
             var $tip;
@@ -31,7 +31,7 @@
                         type: 'GET',
                         data: {},
                         success: function(response) {
-                            $tip.find('.tooltip-content').html(response);
+                            $tip.find('.tooltip-content').length > 0 ? $tip.find('.tooltip-content').html(response) : $tip.html(response);
                             $tip.find('.tooltip-closer').bind('click', hideTooltip);
                             if ( config.cache ) $tip.addClass('tooltip-loaded');
                         } }, config.ajaxOptions));
@@ -106,10 +106,10 @@
     }
 })(jQuery);
 
-$.tooltip.defaults = {
-  tipTemplate: '<div class="tooltip">\
-      <div class="tooltip-t"><div class="tooltip-t-l"></div><div class="tooltip-t-r"></div></div>\
-      <div class="tooltip-m"><div class="tooltip-content">_CONTENT_</div></div>\
-      <div class="tooltip-b"><div class="tooltip-b-l"></div><div class="tooltip-b-r"></div></div>\
-    </div>'
-};
+// $.tooltip.defaults = {
+//   tipTemplate: '<div class="tooltip">\
+//       <div class="tooltip-t"><div class="tooltip-t-l"></div><div class="tooltip-t-r"></div></div>\
+//       <div class="tooltip-m"><div class="tooltip-content">_CONTENT_</div></div>\
+//       <div class="tooltip-b"><div class="tooltip-b-l"></div><div class="tooltip-b-r"></div></div>\
+//     </div>'
+// };
