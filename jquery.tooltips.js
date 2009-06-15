@@ -6,15 +6,16 @@
     $.fn.tooltip = function(options) {
         var config = $.extend({
             tipTemplate: '_CONTENT_',
-            spinner: '<h3>Loading...</h3>',
+            spinner: '<h3 class="tooltip-title">Loading...</h3>',
             delay: 150,
             position: 'right',
             width: 250,
             followMouse: true,
             popup: false,
             ajax: false,
+            cache: true,
             ajaxOptions: {}
-        }, $.tooltip.defaults, options);
+            }, $.tooltip.defaults, options);
         
         return this.each(function() {
             var $this = $(this);
@@ -28,11 +29,11 @@
                     $.ajax($.extend({
                         url: $this.attr('href'),
                         type: 'GET',
-                        async: false,
                         data: {},
                         success: function(response) {
-                            $tip.html(config.tipTemplate.replace(/_CONTENT_/, response));
-                            $tip.addClass('tooltip-loaded')
+                            $tip.find('.tooltip-content').html(response);
+                            $tip.find('.tooltip-closer').bind('click', hideTooltip);
+                            if ( config.cache ) $tip.addClass('tooltip-loaded');
                         } }, config.ajaxOptions));
                 }
                 if (config.delay == 0) {
@@ -73,18 +74,23 @@
 
             if (($this.attr('rel') && $this.attr('rel').search('jquery-tipped') == -1) || !$this.attr('rel')) {
                 $tip
-                    .html(config.tipTemplate.replace(/_CONTENT_/, (tip_title ? '<h3>' + tip_title + '</h3>': '') + tip_content))
+                    .html(config.tipTemplate.replace(/_CONTENT_/, (tip_title ? '<h3 class="tooltip-title">' + tip_title + '</h3>': '') + tip_content))
                     .css({ position: 'absolute' })
                     .css({width: config.width});
                 $this
                     .removeAttr('title')
                     .attr('rel', 'jquery-tipped')
-                    .bind(config.popup ? 'click' : 'mouseenter', showTooltip)
                     
                 if ( config.popup ) {
+                    $this.bind('click', function(){
+                      showTooltip();
+                      return false;
+                    });
                     $tip.find('.tooltip-closer').bind('click', hideTooltip);
                 } else { 
-                    $this.bind('mouseleave', hideTooltip);
+                  $this
+                    .bind('mouseenter', showTooltip)
+                    .bind('mouseleave', hideTooltip);
                 }
 
                 if ( config.followMouse && !config.popup ){
@@ -99,3 +105,11 @@
         });
     }
 })(jQuery);
+
+$j.tooltip.defaults = {
+  tipTemplate: '<div class="tooltip">\
+      <div class="tooltip-t"><div class="tooltip-t-l"></div><div class="tooltip-t-r"></div></div>\
+      <div class="tooltip-m"><div class="tooltip-content">_CONTENT_</div></div>\
+      <div class="tooltip-b"><div class="tooltip-b-l"></div><div class="tooltip-b-r"></div></div>\
+    </div>'
+};
