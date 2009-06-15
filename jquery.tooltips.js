@@ -106,7 +106,7 @@
     }
 })(jQuery);
 
-$j.tooltip.defaults = {
+$.tooltip.defaults = {
   tipTemplate: '<div class="tooltip">\
       <div class="tooltip-t"><div class="tooltip-t-l"></div><div class="tooltip-t-r"></div></div>\
       <div class="tooltip-m"><div class="tooltip-content">_CONTENT_</div></div>\
